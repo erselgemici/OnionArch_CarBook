@@ -16,5 +16,17 @@ namespace OnionApp.Persistence.Concrete.CarRepositories
         {
             return await _context.Cars.Include(x => x.Brand).FirstOrDefaultAsync(x => x.CarID == id);
         }
+
+        public async Task<List<Car>> GetLast5CarsWithBrandsAsync()
+        {
+            var values = await _context.Cars.Include(x => x.Brand).OrderByDescending(x => x.CarID).Take(5).ToListAsync();
+            return values;
+        }
+
+        public int GetCarCount()
+        {
+            var value = _context.Cars.Count();
+            return value;
+        }
     }
 }

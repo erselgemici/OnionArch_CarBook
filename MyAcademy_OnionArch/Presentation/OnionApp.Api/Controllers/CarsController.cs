@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnionApp.Application.Base;
 using OnionApp.Application.Features.Commands.CarCommands;
+using OnionApp.Application.Features.Handlers.CarHandlers;
 using OnionApp.Application.Features.Queries.CarQueries;
 using OnionApp.Application.Features.Results.CarResults;
 
@@ -44,6 +45,14 @@ namespace OnionApp.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new RemoveCarCommand(id));
+            return result.IsSuccessful ? Ok(result) : BadRequest(result);
+        }
+
+        [HttpGet("GetLast5CarsWithBrand")]
+        public async Task<IActionResult> GetLast5CarsWithBrand()
+        {
+            var result = await _mediator.Send(new GetLast5CarsWithBrandQuery());
+
             return result.IsSuccessful ? Ok(result) : BadRequest(result);
         }
     }

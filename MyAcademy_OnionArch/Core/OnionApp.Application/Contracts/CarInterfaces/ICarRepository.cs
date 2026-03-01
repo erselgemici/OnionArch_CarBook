@@ -6,5 +6,7 @@ namespace OnionApp.Application.Contracts.CarInterfaces
     {
         Task<List<Car>> GetCarsWithBrandsAsync();
         Task<Car> GetCarByIdWithBrandAsync(int id);
+        Task<List<Car>> GetLast5CarsWithBrandsAsync();
+        int GetCarCount();
     }
 }

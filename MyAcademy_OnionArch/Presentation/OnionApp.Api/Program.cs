@@ -1,6 +1,8 @@
+using OnionApp.Application.Contracts.BlogInterfaces;
 using OnionApp.Application.Contracts.CarInterfaces;
 using OnionApp.Application.Contracts.CategoryInterfaces;
 using OnionApp.Application.Extensions;
+using OnionApp.Persistence.Concrete.BlogRepositories;
 using OnionApp.Persistence.Concrete.CarRepositories;
 using OnionApp.Persistence.Concrete.CategoryRepositories;
 using OnionApp.Persistence.Extensions;
@@ -13,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 
 builder.Services.AddPersistenceServices(builder.Configuration)
     .AddApplicationServices();
